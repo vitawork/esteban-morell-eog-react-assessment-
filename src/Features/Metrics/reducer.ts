@@ -10,6 +10,7 @@ export type Measurement = {
 export type Measurements = {
   metric: string;
   measurements: Measurement[];
+  color: string;
 };
 
 export type MultipleMeasurements = Measurements[];

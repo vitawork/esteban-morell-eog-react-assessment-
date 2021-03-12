@@ -13,32 +13,31 @@ export default () => {
   const yInfo = (measurements: Measurement[]) => measurements.map(measurement => measurement.value);
 
   return multipleMeasurements.length === 0 ? null : (
-    <React.Fragment>
-      {multipleMeasurements.map(measurements => (
-        <Plot
-          // className={classes.graph}
-          data={[
-            {
-              x: xInfo(measurements.measurements),
-              y: yInfo(measurements.measurements),
-              type: 'linear',
-              marker: { color: 'gray' },
-            },
-          ]}
-          layout={{
-            xaxis: {
-              autotick: false,
-              dtick: 60,
-            },
-            margin: {
-              l: 20,
-              r: 20,
-              t: 20,
-              b: 20,
-            },
-          }}
-        />
-      ))}
-    </React.Fragment>
+    <Plot
+      // className={classes.graph}
+      data={multipleMeasurements.map(measurements => ({
+        x: xInfo(measurements.measurements),
+        y: yInfo(measurements.measurements),
+        type: 'linear',
+        marker: { color: measurements.color },
+        name: measurements.metric,
+      }))}
+      layout={{
+        uirevision: 'true',
+        xaxis: { autorange: true, dtick: 230 },
+        yaxis: { autorange: true },
+
+        // xaxis: {
+        //   autotick: false,
+        //   dtick: 60,
+        // },
+        // margin: {
+        //   l: 20,
+        //   r: 20,
+        //   t: 20,
+        //   b: 20,
+        // },
+      }}
+    />
   );
 };
