@@ -69,8 +69,13 @@ export default () => {
           <Grid item xs={4} key={i}>
             <Card>
               <CardContent>
-                <Typography variant="h6">{splitByUpperCase(measurements.metric)}</Typography>
-                <Typography variant="h4" color="textSecondary">
+                <Typography variant="h6">{`${splitByUpperCase(measurements.metric)} ${
+                  measurements.measurements.length > 0 &&
+                  measurements.measurements[measurements.measurements.length - 1]
+                    ? '(' + measurements.measurements[measurements.measurements.length - 1].unit + ')'
+                    : ''
+                }`}</Typography>
+                <Typography variant="h4" style={{ color: measurements.color }}>
                   {measurements.measurements.length > 0
                     ? measurements.measurements[measurements.measurements.length - 1].value
                     : 'Not Available'}

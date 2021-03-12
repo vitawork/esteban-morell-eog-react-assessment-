@@ -11,9 +11,13 @@ import Cards from '../../components/Cards';
 import Chart from '../../components/Chart';
 
 const useStyles = makeStyles({
+  main: {
+    overflowY: 'auto',
+    height: 'Calc(100% - 64px)',
+  },
   card: {
     margin: '10px',
-    height: 'Calc(100% - 84px)',
+    minHeight: 'Calc(100% - 20px)',
   },
   cardsPaper: { width: '100%', height: '100%' },
 });
@@ -47,22 +51,24 @@ export default () => {
   }, [dispatch, error]);
 
   return (
-    <Card className={classes.card}>
-      <CardContent>
-        <Grid container spacing={2}>
-          <Grid item xs={5}>
-            <MetricsAutocomplete />
-          </Grid>
+    <div className={classes.main}>
+      <Card className={classes.card}>
+        <CardContent>
+          <Grid container spacing={2}>
+            <Grid item xs={5}>
+              <MetricsAutocomplete />
+            </Grid>
 
-          <Grid item xs={7}>
-            <Cards />
-          </Grid>
+            <Grid item xs={7}>
+              <Cards />
+            </Grid>
 
-          <Grid item xs={12}>
-            <Chart />
+            <Grid item xs={12}>
+              <Chart />
+            </Grid>
           </Grid>
-        </Grid>
-      </CardContent>
-    </Card>
+        </CardContent>
+      </Card>
+    </div>
   );
 };

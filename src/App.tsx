@@ -11,10 +11,6 @@ import Metrics from './Features/Metrics/Metrics';
 import { Provider as UrqlProvider, Client, defaultExchanges, subscriptionExchange } from 'urql';
 import { SubscriptionClient } from 'subscriptions-transport-ws';
 
-// const client = createClient({
-//   url: 'https://react.eogresources.com/graphql',
-// });
-
 const subscriptionClient = new SubscriptionClient('ws://react.eogresources.com/graphql', { reconnect: true });
 
 const client = new Client({
