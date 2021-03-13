@@ -30,12 +30,17 @@ export default () => {
       }
     });
 
-    return title.join('/ ');
-    // measurements.map(measurement => measurement.value)};
+    return title.join(' - ');
   };
-  return multipleMeasurements.length === 0 ? null : (
+
+  return multipleMeasurements.length === 0 ? (
+    <img
+      className="eogIcon"
+      src="https://digital.hbs.edu/platform-rctom/wp-content/uploads/sites/4/2015/12/eogLogoPrint.gif"
+      alt="Eog Icon"
+    />
+  ) : (
     <Plot
-      // className={classes.graph}
       data={multipleMeasurements.map(measurements => ({
         x: xInfo(measurements.measurements),
         y: yInfo(measurements.measurements),
@@ -46,23 +51,13 @@ export default () => {
             ? '(' + measurements.measurements[measurements.measurements.length - 1].unit + ')'
             : ''
         }`,
-        text: ['1', '3', '5'],
       }))}
       layout={{
         uirevision: 'true',
         xaxis: { autorange: true, dtick: 230, title: 'Time' },
         yaxis: { autorange: true, title: getUnit(multipleMeasurements) },
-
-        // xaxis: {
-        //   autotick: false,
-        //   dtick: 60,
-        // },
-        // margin: {
-        //   l: 20,
-        //   r: 20,
-        //   t: 20,
-        //   b: 20,
-        // },
+        showlegend: true,
+        legend: { orientation: 'h', x: 0, y: 1.3 },
       }}
     />
   );

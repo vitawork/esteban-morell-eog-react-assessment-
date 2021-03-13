@@ -3,7 +3,6 @@ import { useDispatch } from 'react-redux';
 import { actions } from './reducer';
 import { useQuery } from 'urql';
 import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
 import { makeStyles } from '@material-ui/core/styles';
 import MetricsAutocomplete from '../../components/MetricsAutocomplete';
 import Grid from '@material-ui/core/Grid';
@@ -18,8 +17,31 @@ const useStyles = makeStyles({
   card: {
     margin: '10px',
     minHeight: 'Calc(100% - 20px)',
+    display: 'flex',
   },
   cardsPaper: { width: '100%', height: '100%' },
+  leftContainer: {
+    minWidth: '30%',
+    maxWidth: '350px',
+    padding: '16px',
+    backgroundColor: 'aliceblue',
+    display: 'block',
+  },
+  chartContainer: {
+    flexGrow: 1,
+    padding: '16px',
+    '& .js-plotly-plot': {
+      position: 'relative',
+      top: '50%',
+      transform: 'translate(0, -50%)',
+    },
+    '& .eogIcon': {
+      position: 'relative',
+      top: '50%',
+      left: '50%',
+      transform: 'translate(-50%  , -50%)',
+    },
+  },
 });
 
 const metricsQuery = `
@@ -53,21 +75,17 @@ export default () => {
   return (
     <div className={classes.main}>
       <Card className={classes.card}>
-        <CardContent>
-          <Grid container spacing={2}>
-            <Grid item xs={5}>
-              <MetricsAutocomplete />
-            </Grid>
-
-            <Grid item xs={7}>
-              <Cards />
-            </Grid>
-
-            <Grid item xs={12}>
-              <Chart />
-            </Grid>
+        <Grid container spacing={2} className={classes.leftContainer}>
+          <Grid item xs={12}>
+            <MetricsAutocomplete />
           </Grid>
-        </CardContent>
+          <Grid item xs={12}>
+            <Cards />
+          </Grid>
+        </Grid>
+        <div className={classes.chartContainer}>
+          <Chart />
+        </div>
       </Card>
     </div>
   );
